@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://echoprotocolz.github.io/epic_network_website/sitemap.xml
