@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#05091b">
+<meta name="description" content="EPIC Network — an open blockchain ecosystem in development. Powered by ECHO.">
+<title>EPIC Network | Powered by ECHO</title>
+<style>
+:root{--cyan:#00dcff;--purple:#a843ff;--orange:#ff891d;--bg:#05091b}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:white;font-family:Arial,Helvetica,sans-serif;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+header{position:sticky;top:0;z-index:20;background:#05091be8;backdrop-filter:blur(18px);border-bottom:1px solid #244b88}
+nav{max-width:1250px;margin:auto;padding:16px 24px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+.brand{font-size:23px;font-weight:900;font-style:italic;letter-spacing:1px;background:linear-gradient(90deg,var(--cyan),#fff,var(--purple));background-clip:text;color:transparent}
+.brand small{display:block;font-size:10px;letter-spacing:3px;color:#c4b8ff;font-style:normal}
+.links{display:flex;gap:22px;font-size:13px;font-weight:bold}
+.links a:hover{color:var(--cyan)}
+.join{border:1px solid var(--orange);border-radius:30px;padding:12px 20px;box-shadow:0 0 18px #ff891d70;font-weight:bold;font-size:13px}
+.hero{position:relative;min-height:750px;overflow:hidden;display:flex;align-items:center;justify-content:center;text-align:center;padding:70px 20px 150px;background:radial-gradient(ellipse at 50% 42%,#132d77 0%,#120c3c 36%,#05091b 76%)}
+.hero:before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0 79px,#00dcff08 80px),linear-gradient(transparent 85%,#00dcff13);pointer-events:none}
+.orbit{width:230px;height:230px;margin:0 auto 20px;border:4px solid var(--cyan);border-radius:50%;display:grid;place-items:center;position:relative;box-shadow:0 0 35px var(--cyan),inset 0 0 40px #652dff;animation:float 5s ease-in-out infinite}
+.orbit:before{content:"";position:absolute;width:280px;height:82px;border:5px solid var(--purple);border-radius:50%;transform:rotate(-24deg);box-shadow:0 0 30px var(--purple)}
+.orbit span{font-size:145px;font-weight:900;font-style:italic;background:linear-gradient(135deg,#fff 10%,#70eaff 40%,#655aff 70%,#fff);background-clip:text;color:transparent;filter:drop-shadow(0 0 15px #00cfff)}
+@keyframes float{50%{transform:translateY(-12px)}}
+.hero-content{position:relative;z-index:3;max-width:1050px}
+.eyebrow{color:#8cecff;font-size:12px;letter-spacing:5px;font-weight:bold}
+h1{font-size:clamp(46px,9vw,108px);line-height:.95;margin:20px 0;font-weight:900;font-style:italic;letter-spacing:-3px;text-shadow:0 0 35px #783aff}
+h1 em{font-style:inherit;background:linear-gradient(90deg,var(--cyan),#8b5cff,var(--purple));background-clip:text;color:transparent}
+.subtitle{font-size:clamp(16px,2vw,22px);color:#cbd9ff;line-height:1.6;max-width:700px;margin:20px auto 30px}
+.actions{display:flex;justify-content:center;gap:15px;flex-wrap:wrap}
+.btn{padding:16px 28px;border-radius:35px;font-size:13px;font-weight:900;letter-spacing:1px;border:1px solid var(--cyan);background:#00bfff1a;box-shadow:0 0 20px #00d5ff50}
+.btn:hover{background:#00d5ff44;transform:translateY(-2px)}
+.btn.orange{border-color:var(--orange);background:#ff891d1a;box-shadow:0 0 20px #ff891d60}
+.city{position:absolute;bottom:0;left:0;width:100%;height:260px;z-index:1;opacity:.85}
+.city svg{width:100%;height:100%}
+.grid-floor{position:absolute;bottom:-80px;left:-30%;width:160%;height:240px;transform:perspective(220px) rotateX(60deg);background:linear-gradient(#00dcff55 1px,transparent 1px),linear-gradient(90deg,#a843ff55 1px,transparent 1px);background-size:50px 35px;box-shadow:0 -20px 70px #00cfff55}
+section{padding:100px 24px;position:relative}
+.wrap{max-width:1150px;margin:auto}
+.section-label{text-transform:uppercase;letter-spacing:5px;color:var(--cyan);font-size:12px;font-weight:bold}
+h2{font-size:clamp(32px,5vw,60px);margin:15px 0 25px;line-height:1.1}
+.lead{color:#b7c7eb;font-size:17px;line-height:1.8;max-width:780px}
+.features{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:50px}
+.feature{background:linear-gradient(145deg,#111d49,#0a0b23);border:1px solid #2362ae;border-radius:20px;padding:32px;box-shadow:0 0 30px #008cff1b;transition:.25s}
+.feature:nth-child(2){border-color:#8e44d9}
+.feature:nth-child(3){border-color:#f18b37}
+.feature:hover{transform:translateY(-8px);box-shadow:0 0 35px #00dcff55}
+.feature-icon{font-size:45px;margin-bottom:20px}
+.feature h3{font-size:24px;margin:0 0 12px}
+.feature p{color:#b7c7eb;line-height:1.7}
+#roadmap{background:linear-gradient(180deg,#090e28,#10113a,#05091b)}
+.timeline{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;margin-top:50px}
+.milestone{border-top:3px solid var(--cyan);padding:24px 15px;background:#111c3d80;border-radius:0 0 14px 14px}
+.milestone:nth-child(3){border-color:var(--purple)}
+.milestone:nth-child(4){border-color:var(--orange)}
+.status{display:inline-block;padding:7px 13px;border-radius:20px;background:#15355a;color:#91e8ff;font-size:11px;font-weight:bold;letter-spacing:1px}
+.milestone h3{font-size:19px}
+.milestone p{color:#b7c7eb;line-height:1.6;font-size:14px}
+.community{text-align:center;background:radial-gradient(ellipse at center,#211257,#05091b 75%)}
+.community .lead{margin:0 auto 30px}
+footer{padding:35px 24px;text-align:center;border-top:1px solid #244b88;color:#9dadd0;font-size:12px;line-height:1.8}
+@media(max-width:850px){.links{display:none}.features{grid-template-columns:1fr}.timeline{grid-template-columns:1fr 1fr}.hero{min-height:720px}.orbit{width:175px;height:175px}.orbit span{font-size:110px}.orbit:before{width:215px}nav{padding:14px}}
+@media(max-width:520px){.timeline{grid-template-columns:1fr}.join{font-size:11px;padding:10px}.brand{font-size:17px}h1{letter-spacing:-1px}.hero{padding-top:45px}.city{height:180px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;scroll-behavior:auto!important;transition:none!important}}
+
+/* EPIC NETWORK — HOLOGRAPHIC DESIGN UPDATE */
+.hero {
+  min-height: 760px;
+  padding: 80px 20px 310px;
+}
+.hero-content {
+  z-index: 5;
+}
+.network-horizon {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 300px;
+  pointer-events: none;
+  opacity: .9;
+  mask-image: linear-gradient(transparent, black 25%);
+}
+.network-horizon svg {
+  width: 100%;
+  height: 100%;
+}
+.cta-band {
+  position: relative;
+  z-index: 6;
+  padding: 35px 20px 45px;
+  background: linear-gradient(180deg,#090e2b,#11183d,#05091b);
+  border-top: 1px solid #234b99;
+  border-bottom: 1px solid #263c74;
+}
+.cta-band .actions {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.cta-band .btn {
+  min-width: 225px;
+  text-align: center;
+  padding: 19px 28px;
+  font-size: 14px;
+  transition: transform .25s,box-shadow .25s;
+}
+.cta-band .btn:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 35px #00dfff90;
+}
+@media(max-width:600px) {
+  .hero {
+    min-height: 690px;
+    padding: 65px 20px 255px;
+  }
+  .network-horizon {
+    height: 235px;
+  }
+  .cta-band .btn {
+    width: 100%;
+    max-width: 350px;
+  }
+}
+
+
+/* EPIC CINEMATIC ENHANCEMENT V1 */
+
+.hero {
+  isolation: isolate;
+  min-height: 780px;
+  background:
+    radial-gradient(ellipse at 50% 35%,#2645b7 0%,transparent 37%),
+    radial-gradient(ellipse at 20% 70%,#6816a855,transparent 50%),
+    radial-gradient(ellipse at 80% 65%,#007eff44,transparent 50%),
+    #05091b;
+}
+
+.hero::after {
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  z-index:0;
+  background:
+    radial-gradient(circle at 20% 25%,#00eaff99 0 1px,transparent 3px),
+    radial-gradient(circle at 75% 20%,#ba58ff99 0 2px,transparent 4px),
+    radial-gradient(circle at 85% 55%,#00eaff88 0 1px,transparent 4px),
+    radial-gradient(circle at 30% 60%,#e04aff88 0 2px,transparent 5px);
+  background-size:220px 190px,310px 250px,270px 300px,370px 230px;
+  animation:epicStars 16s linear infinite;
+}
+
+@keyframes epicStars {
+  50% {opacity:.45}
+  100% {background-position:220px 190px,-310px 250px,270px -300px,-370px -230px}
+}
+
+.orbit {
+  box-shadow:
+    0 0 25px #00eaff,
+    0 0 85px #6c39ff88,
+    0 0 160px #00aaff44,
+    inset 0 0 55px #713aff;
+}
+
+.orbit::before {
+  animation:epicRing 7s ease-in-out infinite;
+}
+
+@keyframes epicRing {
+  0%,100% {
+    transform:rotate(-24deg) scale(1);
+    filter:brightness(1);
+  }
+  50% {
+    transform:rotate(-18deg) scale(1.08);
+    filter:brightness(1.5);
+  }
+}
+
+.network-horizon {
+  height:340px;
+  opacity:1;
+  overflow:hidden;
+  mask-image:linear-gradient(
+    transparent 0%,
+    #000 20%,
+    #000 100%
+  );
+}
+
+.network-horizon::before {
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(
+      ellipse at 50% 100%,
+      #00dfff77 0%,
+      #713aff55 28%,
+      transparent 70%
+    );
+  filter:blur(28px);
+  animation:epicGlow 5s ease-in-out infinite alternate;
+}
+
+.network-horizon::after {
+  content:"";
+  position:absolute;
+  left:-40%;
+  bottom:0;
+  width:55%;
+  height:100%;
+  background:linear-gradient(
+    90deg,
+    transparent,
+    #00eaff18,
+    #ffffff25,
+    #a843ff22,
+    transparent
+  );
+  transform:skewX(-25deg);
+  animation:epicSweep 9s ease-in-out infinite;
+}
+
+@keyframes epicGlow {
+  from {opacity:.5;transform:scale(.94)}
+  to {opacity:1;transform:scale(1.08)}
+}
+
+@keyframes epicSweep {
+  0%,10% {left:-65%;opacity:0}
+  30% {opacity:1}
+  70% {opacity:1}
+  90%,100% {left:120%;opacity:0}
+}
+
+.network-horizon svg {
+  position:relative;
+  z-index:2;
+  filter:drop-shadow(0 0 5px #00cfff88);
+}
+
+.network-horizon svg > g:first-of-type path {
+  stroke-dasharray:12 9;
+  animation:epicFlow 5s linear infinite;
+}
+
+@keyframes epicFlow {
+  to {stroke-dashoffset:-84}
+}
+
+.network-horizon svg > circle {
+  transform-box:fill-box;
+  transform-origin:center;
+  animation:epicPulse 3s ease-in-out infinite alternate;
+}
+
+.network-horizon svg > circle:nth-of-type(3n) {
+  animation-delay:-1s;
+}
+
+.network-horizon svg > circle:nth-of-type(5n) {
+  animation-delay:-2s;
+}
+
+@keyframes epicPulse {
+  from {opacity:.45;transform:scale(.8)}
+  to {opacity:1;transform:scale(1.45)}
+}
+
+.epic-energy-trails path {
+  fill:none;
+  stroke-width:3;
+  stroke-linecap:round;
+  stroke-dasharray:3 28 6 250;
+  animation:epicTrail 7s linear infinite;
+  filter:drop-shadow(0 0 8px currentColor);
+}
+
+.epic-energy-trails path:nth-child(2) {
+  animation-delay:-2s;
+}
+
+.epic-energy-trails path:nth-child(3) {
+  animation-delay:-4s;
+}
+
+@keyframes epicTrail {
+  to {stroke-dashoffset:-574}
+}
+
+.cta-band {
+  background:
+    radial-gradient(ellipse at 50% 0%,#00cfff22,transparent 70%),
+    linear-gradient(180deg,#101d48,#0b1435,#05091b);
+  border-top:1px solid #00dfff66;
+  box-shadow:0 -15px 50px #00bfff20;
+}
+
+.cta-band .btn {
+  background:linear-gradient(135deg,#09234f,#14225d);
+  border-width:2px;
+  box-shadow:
+    0 0 18px #00dfff55,
+    inset 0 0 20px #00dfff12;
+}
+
+.cta-band .btn.orange {
+  background:linear-gradient(135deg,#3a193a,#281848);
+  box-shadow:
+    0 0 18px #ff891d55,
+    inset 0 0 20px #ff891d15;
+}
+
+@media(max-width:600px) {
+  .hero {
+    min-height:700px;
+  }
+  .network-horizon {
+    height:245px;
+  }
+}
+
+@media(prefers-reduced-motion:reduce) {
+  .hero::after,
+  .orbit::before,
+  .network-horizon::before,
+  .network-horizon::after,
+  .network-horizon svg > g:first-of-type path,
+  .network-horizon svg > circle,
+  .epic-energy-trails path {
+    animation:none!important;
+  }
+}
+
+
+/* EPIC HOLOGRAPHIC CARDS V1 */
+
+.features {
+  gap: 25px;
+  perspective: 1200px;
+}
+
+.feature {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  min-height: 350px;
+  padding: 36px 30px;
+  border-radius: 24px;
+  background:
+    radial-gradient(circle at 50% 0%,#00dfff24,transparent 65%),
+    linear-gradient(145deg,#14265b,#080d2a 85%);
+  border: 1px solid #00dfff88;
+  box-shadow:
+    0 0 25px #00dfff22,
+    inset 0 0 30px #00dfff0c;
+  transition: transform .3s,box-shadow .3s;
+}
+
+.feature:nth-child(2) {
+  border-color: #a843ff;
+  background:
+    radial-gradient(circle at 50% 0%,#a843ff30,transparent 65%),
+    linear-gradient(145deg,#21164f,#080d2a 85%);
+}
+
+.feature:nth-child(3) {
+  border-color: #ff891d;
+  background:
+    radial-gradient(circle at 50% 0%,#ff891d25,transparent 65%),
+    linear-gradient(145deg,#302044,#080d2a 85%);
+}
+
+.feature::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(90deg,#00dcff15 1px,transparent 1px),
+    linear-gradient(#00dcff12 1px,transparent 1px);
+  background-size: 28px 28px;
+  mask-image: linear-gradient(#000,transparent 90%);
+}
+
+.feature::after {
+  content: "";
+  position: absolute;
+  height: 3px;
+  width: 80%;
+  top: 0;
+  left: 10%;
+  background: linear-gradient(90deg,transparent,#00eaff,transparent);
+  box-shadow: 0 0 20px #00eaff;
+}
+
+.feature:nth-child(2)::after {
+  background: linear-gradient(90deg,transparent,#b45aff,transparent);
+  box-shadow: 0 0 20px #b45aff;
+}
+
+.feature:nth-child(3)::after {
+  background: linear-gradient(90deg,transparent,#ff891d,transparent);
+  box-shadow: 0 0 20px #ff891d;
+}
+
+.feature:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 0 45px #00dfff55;
+}
+
+.feature-icon {
+  display: grid;
+  place-items: center;
+  width: 100px;
+  height: 100px;
+  margin: 0 auto 30px;
+  border: 2px solid #00eaff;
+  border-radius: 50%;
+  background: radial-gradient(circle,#143c85,#0a1033);
+  box-shadow:
+    0 0 25px #00dfff88,
+    inset 0 0 25px #00dfff44;
+  animation: epicIconGlow 4s ease-in-out infinite alternate;
+}
+
+.feature-icon span {
+  font-size: 57px;
+  font-weight: 900;
+  font-style: italic;
+  line-height: 1;
+  color: #a5f4ff;
+  text-shadow: 0 0 20px #00eaff;
+}
+
+.feature:nth-child(2) .feature-icon {
+  border-color: #a843ff;
+  box-shadow: 0 0 30px #a843ff99;
+}
+
+.feature:nth-child(3) .feature-icon {
+  border-color: #ff891d;
+  box-shadow: 0 0 30px #ff891d88;
+}
+
+.feature h3 {
+  text-align: center;
+  font-size: 25px;
+  letter-spacing: .5px;
+}
+
+.feature p {
+  text-align: center;
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+@keyframes epicIconGlow {
+  from {filter:brightness(.85)}
+  to {filter:brightness(1.4)}
+}
+
+@media(max-width:850px) {
+  .feature {min-height:auto}
+}
+
+@media(prefers-reduced-motion:reduce) {
+  .feature-icon {animation:none}
+}
+
+
+/* EPIC NETWORK EGP-1 DOCUMENTATION */
+.egp-section {
+  padding: 100px 24px;
+  background:
+    radial-gradient(ellipse at 75% 35%, #6f2cff25, transparent 55%),
+    radial-gradient(ellipse at 15% 80%, #00dfff22, transparent 55%),
+    #080d25;
+}
+.egp-wrap {
+  max-width: 1150px;
+  margin: auto;
+}
+.egp-heading {
+  font-size: clamp(36px, 5vw, 64px);
+  line-height: 1.1;
+  margin: 15px 0 20px;
+  color: white;
+}
+.egp-heading span {
+  background: linear-gradient(90deg, #00eaff, #ad54ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.egp-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 50px;
+  align-items: center;
+  margin-top: 45px;
+}
+.egp-cover {
+  width: 100%;
+  display: block;
+  border-radius: 20px;
+  border: 1px solid #00dfff99;
+  box-shadow: 0 0 35px #00dfff44, 0 0 65px #8e37ff22;
+}
+.egp-copy {
+  color: #dce8ff;
+  line-height: 1.85;
+  font-size: 16px;
+}
+.egp-topics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 25px 0;
+}
+.egp-topics span {
+  border: 1px solid #00eaff77;
+  background: #00dfff12;
+  border-radius: 30px;
+  padding: 8px 14px;
+  color: #baf7ff;
+  font-size: 13px;
+}
+.egp-button {
+  display: inline-block;
+  padding: 15px 28px;
+  border: 2px solid #00eaff;
+  border-radius: 40px;
+  color: white;
+  background: linear-gradient(135deg, #09538a, #352073);
+  font-weight: 800;
+  text-decoration: none;
+  box-shadow: 0 0 25px #00eaff55;
+  transition: transform .2s, box-shadow .2s;
+}
+.egp-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 40px #00eaff88;
+}
+.egp-note {
+  margin-top: 22px;
+  color: #aab9d8;
+  font-size: 13px;
+}
+@media (max-width: 760px) {
+  .egp-section { padding: 65px 20px; }
+  .egp-layout { grid-template-columns: 1fr; gap: 30px; }
+}
+
+</style>
+</head>
+<body>
+<header>
+<nav>
+<a href="#home" class="brand">EPIC NETWORK<small>POWERED BY ECHO</small></a>
+<div class="links">
+<a href="#home">Home</a>
+<a href="#about">About</a>
+<a href="#token">ECHO Token</a>
+<a href="#roadmap">Roadmap</a>
+<a href="#community">Community</a>
+</div>
+<a href="#community" class="join">🚀 JOIN THE JOURNEY</a>
+</nav>
+</header>
+
+<main>
+<div class="hero" id="home">
+<div class="hero-content">
+<div class="orbit"><span>E</span></div>
+<div class="eyebrow">THE NEXT CHAPTER OF BLOCKCHAIN</div>
+<h1>SOMETHING<br><em>EPIC</em> IS COMING</h1>
+<p class="subtitle">An open blockchain ecosystem in development. Built for innovators, developers, and a future powered by ECHO.</p>
+
+</div>
+<div class="network-horizon" aria-hidden="true">
+<svg viewBox="0 0 1400 340" preserveAspectRatio="xMidYMax slice">
+<defs>
+<linearGradient id="netglow" x1="0" y1="0" x2="1" y2="1">
+<stop stop-color="#00eaff"/>
+<stop offset=".5" stop-color="#745cff"/>
+<stop offset="1" stop-color="#ff49e8"/>
+</linearGradient>
+<filter id="nodeglow"><feGaussianBlur stdDeviation="5"/></filter>
+</defs>
+<ellipse cx="700" cy="245" rx="610" ry="175" fill="#1442c0" opacity=".12"/>
+<g fill="none" stroke="url(#netglow)" stroke-width="1.4" opacity=".65">
+<path d="M-40.0 65.0 L75.0 76.5"/>
+<path d="M-40.0 65.0 L17.0 151.5"/>
+<path d="M-40.0 65.0 L132.0 153.6"/>
+<path d="M75.0 76.5 L190.0 81.0"/>
+<path d="M75.0 76.5 L132.0 153.6"/>
+<path d="M75.0 76.5 L247.0 146.2"/>
+<path d="M190.0 81.0 L305.0 75.8"/>
+<path d="M190.0 81.0 L247.0 146.2"/>
+<path d="M190.0 81.0 L362.0 133.9"/>
+<path d="M305.0 75.8 L420.0 64.1"/>
+<path d="M305.0 75.8 L362.0 133.9"/>
+<path d="M305.0 75.8 L477.0 124.1"/>
+<path d="M420.0 64.1 L535.0 52.9"/>
+<path d="M420.0 64.1 L477.0 124.1"/>
+<path d="M420.0 64.1 L592.0 122.7"/>
+<path d="M535.0 52.9 L650.0 49.1"/>
+<path d="M535.0 52.9 L592.0 122.7"/>
+<path d="M535.0 52.9 L707.0 130.6"/>
+<path d="M650.0 49.1 L765.0 54.9"/>
+<path d="M650.0 49.1 L707.0 130.6"/>
+<path d="M650.0 49.1 L822.0 143.0"/>
+<path d="M765.0 54.9 L880.0 66.9"/>
+<path d="M765.0 54.9 L822.0 143.0"/>
+<path d="M765.0 54.9 L937.0 152.4"/>
+<path d="M880.0 66.9 L995.0 77.7"/>
+<path d="M880.0 66.9 L937.0 152.4"/>
+<path d="M880.0 66.9 L1052.0 153.1"/>
+<path d="M995.0 77.7 L1110.0 80.8"/>
+<path d="M995.0 77.7 L1052.0 153.1"/>
+<path d="M995.0 77.7 L1167.0 144.6"/>
+<path d="M1110.0 80.8 L1225.0 74.4"/>
+<path d="M1110.0 80.8 L1167.0 144.6"/>
+<path d="M1110.0 80.8 L1282.0 132.1"/>
+<path d="M1225.0 74.4 L1340.0 62.2"/>
+<path d="M1225.0 74.4 L1282.0 132.1"/>
+<path d="M1225.0 74.4 L1397.0 123.2"/>
+<path d="M1340.0 62.2 L1397.0 123.2"/>
+<path d="M17.0 151.5 L132.0 153.6"/>
+<path d="M17.0 151.5 L-40.0 225.5"/>
+<path d="M17.0 151.5 L75.0 216.4"/>
+<path d="M132.0 153.6 L247.0 146.2"/>
+<path d="M132.0 153.6 L75.0 216.4"/>
+<path d="M132.0 153.6 L190.0 203.9"/>
+<path d="M247.0 146.2 L362.0 133.9"/>
+<path d="M247.0 146.2 L190.0 203.9"/>
+<path d="M247.0 146.2 L305.0 195.8"/>
+<path d="M362.0 133.9 L477.0 124.1"/>
+<path d="M362.0 133.9 L305.0 195.8"/>
+<path d="M362.0 133.9 L420.0 196.9"/>
+<path d="M477.0 124.1 L592.0 122.7"/>
+<path d="M477.0 124.1 L420.0 196.9"/>
+<path d="M477.0 124.1 L535.0 206.5"/>
+<path d="M592.0 122.7 L707.0 130.6"/>
+<path d="M592.0 122.7 L535.0 206.5"/>
+<path d="M592.0 122.7 L650.0 218.9"/>
+<path d="M707.0 130.6 L822.0 143.0"/>
+<path d="M707.0 130.6 L650.0 218.9"/>
+<path d="M707.0 130.6 L765.0 226.5"/>
+<path d="M822.0 143.0 L937.0 152.4"/>
+<path d="M822.0 143.0 L765.0 226.5"/>
+<path d="M822.0 143.0 L880.0 224.7"/>
+<path d="M937.0 152.4 L1052.0 153.1"/>
+<path d="M937.0 152.4 L880.0 224.7"/>
+<path d="M937.0 152.4 L995.0 214.6"/>
+<path d="M1052.0 153.1 L1167.0 144.6"/>
+<path d="M1052.0 153.1 L995.0 214.6"/>
+<path d="M1052.0 153.1 L1110.0 202.3"/>
+<path d="M1167.0 144.6 L1282.0 132.1"/>
+<path d="M1167.0 144.6 L1110.0 202.3"/>
+<path d="M1167.0 144.6 L1225.0 195.3"/>
+<path d="M1282.0 132.1 L1397.0 123.2"/>
+<path d="M1282.0 132.1 L1225.0 195.3"/>
+<path d="M1282.0 132.1 L1340.0 197.8"/>
+<path d="M1397.0 123.2 L1340.0 197.8"/>
+<path d="M-40.0 225.5 L75.0 216.4"/>
+<path d="M-40.0 225.5 L17.0 286.3"/>
+<path d="M-40.0 225.5 L132.0 274.2"/>
+<path d="M75.0 216.4 L190.0 203.9"/>
+<path d="M75.0 216.4 L132.0 274.2"/>
+<path d="M75.0 216.4 L247.0 268.1"/>
+<path d="M190.0 203.9 L305.0 195.8"/>
+<path d="M190.0 203.9 L247.0 268.1"/>
+<path d="M190.0 203.9 L362.0 271.6"/>
+<path d="M305.0 195.8 L420.0 196.9"/>
+<path d="M305.0 195.8 L362.0 271.6"/>
+<path d="M305.0 195.8 L477.0 282.7"/>
+<path d="M420.0 196.9 L535.0 206.5"/>
+<path d="M420.0 196.9 L477.0 282.7"/>
+<path d="M420.0 196.9 L592.0 294.5"/>
+<path d="M535.0 206.5 L650.0 218.9"/>
+<path d="M535.0 206.5 L592.0 294.5"/>
+<path d="M535.0 206.5 L707.0 300.0"/>
+<path d="M650.0 218.9 L765.0 226.5"/>
+<path d="M650.0 218.9 L707.0 300.0"/>
+<path d="M650.0 218.9 L822.0 295.8"/>
+<path d="M765.0 226.5 L880.0 224.7"/>
+<path d="M765.0 226.5 L822.0 295.8"/>
+<path d="M765.0 226.5 L937.0 284.4"/>
+<path d="M880.0 224.7 L995.0 214.6"/>
+<path d="M880.0 224.7 L937.0 284.4"/>
+<path d="M880.0 224.7 L1052.0 272.8"/>
+<path d="M995.0 214.6 L1110.0 202.3"/>
+<path d="M995.0 214.6 L1052.0 272.8"/>
+<path d="M995.0 214.6 L1167.0 268.0"/>
+<path d="M1110.0 202.3 L1225.0 195.3"/>
+<path d="M1110.0 202.3 L1167.0 268.0"/>
+<path d="M1110.0 202.3 L1282.0 272.9"/>
+<path d="M1225.0 195.3 L1340.0 197.8"/>
+<path d="M1225.0 195.3 L1282.0 272.9"/>
+<path d="M1225.0 195.3 L1397.0 284.5"/>
+<path d="M1340.0 197.8 L1397.0 284.5"/>
+<path d="M17.0 286.3 L132.0 274.2"/>
+<path d="M132.0 274.2 L247.0 268.1"/>
+<path d="M247.0 268.1 L362.0 271.6"/>
+<path d="M362.0 271.6 L477.0 282.7"/>
+<path d="M477.0 282.7 L592.0 294.5"/>
+<path d="M592.0 294.5 L707.0 300.0"/>
+<path d="M707.0 300.0 L822.0 295.8"/>
+<path d="M822.0 295.8 L937.0 284.4"/>
+<path d="M937.0 284.4 L1052.0 272.8"/>
+<path d="M1052.0 272.8 L1167.0 268.0"/>
+<path d="M1167.0 268.0 L1282.0 272.9"/>
+<path d="M1282.0 272.9 L1397.0 284.5"/>
+</g>
+<circle cx="-40.0" cy="65.0" r="14" fill="#c05aff" opacity=".32" filter="url(#nodeglow)"/>
+<circle cx="-40.0" cy="65.0" r="7" fill="#c05aff"/>
+<circle cx="75.0" cy="76.5" r="8" fill="#00eaff" opacity=".32" filter="url(#nodeglow)"/>
+<circle cx="75.0" cy="76.5" r="4" fill="#00eaff"/>
+<circle cx="190.0" cy="81.0" r="8" fill="#00eaff" opacity=".32" filter="url(#nodeglow)"/>
+<circle cx="190.0" cy="81.0" r="4" fill="#00eaff"/>
+<circle cx="305.0" cy="75.8" r="8" fill="#c05aff" opacity=".32" filter="url(#nodeglow)"/>
+<circle cx="305.0" cy="75.8" r="4" fill="#c05aff"/>
+<circle cx="420.0" cy="64.1" r="8" fill="#00eaff" opacity=".32" filter="url(#nodeglow)"/>
+<circle cx="420.0" cy="64.1" r="4" fill="#00eaff"/>
+<circle cx="535.0" cy="52.9" r="14" fill="#00eaff" opacity=".32" filter="url(#nodeglow)"/>
+<circle cx="535.0" cy="52.9" r="7" fill="#00eaff"/>
+<circle cx="650.0" cy="49.1" r="8" fill="#c05aff" opacity=".32" filter="url(#nodeglow)"/>
+<circle cx="650.0" cy="49.1" r="4" fill="#c05aff"/>
+<circle cx="765.0" cy="54.9" r="8" fill="#00eaff" opacity=".32" filter="url(#nodeglow)"/>
+<circle cx="765.0" cy="54.9" r="4" fill="#00eaff"/>
+<circle cx="880.0" cy="66.9" r="8" fill="#00eaff" opacity=".32" filter="url(#nodeglow)"/>
+<circle cx="880.0" cy="66.9" r="4" fill="#00eaff"/>
+<circle cx="995.0" cy="77.7" r="8" fill="#c05aff" opacity=".32" filter="url(#nodeglow)"/>
+<circle cx="995.0" cy="77.7" r="4" fill="#c05aff"/>
+<circle cx="1110.0" cy="80.8" r="14" fill="#00eaff" opacity=".32" filter="url(#nodeglow)"/>
+<circle cx="1110.0" cy="80.8" r="7" fill="#00eaff"/>
+<circle cx="1225.0" cy="74.4" r="8" fill="#00eaff" opacity=".32" filter="url(#nodeglow)"/>
+<circle cx="1225.0" cy="74.4" r="4" fill="#00eaff"/>
+<circle cx="1340.0" cy="62.2" r="8" fill="#c05aff" opacity=".32" filter="url(#nodeglow)"/>
+<circle cx="1340.0" cy="62.2" r="4" fill="#c05aff"/>
+<circle cx="17.0" cy="151.5" r="8" fill="#00eaff" opacity=".32" filter="url(#nodeglow)"/>
+<circle cx="17.0" cy="151.5" r="4" fill="#00eaff"/>
+<circle cx="132.0" cy="153.6" r="8" fill="#00eaff" opacity=".32" filter="url(#nodeglow)"/>
+<circle cx="132.0" cy="153.6" r="4" fill="#00eaff"/>
+<circle cx="247.0" cy="146.2" r="14" fill="#c05aff" opacity=".32" filter="url(#nodeglow)"/>
+<circle cx="247.0" cy="146.2" r="7" fill="#c05aff"/>
+<circle cx="362.0" cy="133.9" r="8" fill="#00eaff" opacity=".32" filter="url(#nodeglow)"/>
+<circle cx="362.0" cy="133.9" r="4" fill="#00eaff"/>
+<circle cx="477.0" cy="124.1" r="8" fill="#00eaff" opacity=".32" filter="url(#nodeglow)"/>
+<circle cx="477.0" cy="124.1" r="4" fill="#00eaff"/>
+<circle cx="592.0" cy="122.7" r="8" fill="#c05aff" opacity=".32" filter="url(#nodeglow)"/>
+<circle cx="592.0" cy="122.7" r="4" fill="#c05aff"/>
+<circle cx="707.0" cy="130.6" r="8" fill="#00eaff" opacity=".32" filter="url(#nodeglow)"/>
+<circle cx="707.0" cy="130.6" r="4" fill="#00eaff"/>
+<circle cx="822.0" cy="143.0" r="14" fill="#00eaff" opacity=".32" filter="url(#nodeglow)"/>
+<circle cx="822.0" cy="143.0" r="7" fill="#00eaff"/>
+<circle cx="937.0" cy="152.4" r="8" fill="#c05aff" opacity=".32" filter="url(#nodeglow)"/>
+<circle cx="937.0" cy="152.4" r="4" fill="#c05aff"/>
+<circle cx="1052.0" cy="153.1" r="8" fill="#00eaff" opacity=".32" filter="url(#nodeglow)"/>
+<circle cx="1052.0" cy="153.1" r="4" fill="#00eaff"/>
+<circle cx="1167.0" cy="144.6" r="8" fill="#00eaff" opacity=".32" filter="url(#nodeglow)"/>
+<circle cx="1167.0" cy="144.6" r="4" fill="#00eaff"/>
+<circle cx="1282.0" cy="132.1" r="8" fill="#c05aff" opacity=".32" filter="url(#nodeglow)"/>
+<circle cx="1282.0" cy="132.1" r="4" fill="#c05aff"/>
+<circle cx="1397.0" cy="123.2" r="14" fill="#00eaff" opacity=".32" filter="url(#nodeglow)"/>
+<circle cx="1397.0" cy="123.2" r="7" fill="#00eaff"/>
+<circle cx="-40.0" cy="225.5" r="8" fill="#00eaff" opacity=".32" filter="url(#nodeglow)"/>
+<circle cx="-40.0" cy="225.5" r="4" fill="#00eaff"/>
+<circle cx="75.0" cy="216.4" r="8" fill="#c05aff" opacity=".32" filter="url(#nodeglow)"/>
+<circle cx="75.0" cy="216.4" r="4" fill="#c05aff"/>
+<circle cx="190.0" cy="203.9" r="8" fill="#00eaff" opacity=".32" filter="url(#nodeglow)"/>
+<circle cx="190.0" cy="203.9" r="4" fill="#00eaff"/>
+<circle cx="305.0" cy="195.8" r="8" fill="#00eaff" opacity=".32" filter="url(#nodeglow)"/>
+<circle cx="305.0" cy="195.8" r="4" fill="#00eaff"/>
+<circle cx="420.0" cy="196.9" r="14" fill="#c05aff" opacity=".32" filter="url(#nodeglow)"/>
+<circle cx="420.0" cy="196.9" r="7" fill="#c05aff"/>
+<circle cx="535.0" cy="206.5" r="8" fill="#00eaff" opacity=".32" filter="url(#nodeglow)"/>
+<circle cx="535.0" cy="206.5" r="4" fill="#00eaff"/>
+<circle cx="650.0" cy="218.9" r="8" fill="#00eaff" opacity=".32" filter="url(#nodeglow)"/>
+<circle cx="650.0" cy="218.9" r="4" fill="#00eaff"/>
+<circle cx="765.0" cy="226.5" r="8" fill="#c05aff" opacity=".32" filter="url(#nodeglow)"/>
+<circle cx="765.0" cy="226.5" r="4" fill="#c05aff"/>
+<circle cx="880.0" cy="224.7" r="8" fill="#00eaff" opacity=".32" filter="url(#nodeglow)"/>
+<circle cx="880.0" cy="224.7" r="4" fill="#00eaff"/>
+<circle cx="995.0" cy="214.6" r="14" fill="#00eaff" opacity=".32" filter="url(#nodeglow)"/>
+<circle cx="995.0" cy="214.6" r="7" fill="#00eaff"/>
+<circle cx="1110.0" cy="202.3" r="8" fill="#c05aff" opacity=".32" filter="url(#nodeglow)"/>
+<circle cx="1110.0" cy="202.3" r="4" fill="#c05aff"/>
+<circle cx="1225.0" cy="195.3" r="8" fill="#00eaff" opacity=".32" filter="url(#nodeglow)"/>
+<circle cx="1225.0" cy="195.3" r="4" fill="#00eaff"/>
+<circle cx="1340.0" cy="197.8" r="8" fill="#00eaff" opacity=".32" filter="url(#nodeglow)"/>
+<circle cx="1340.0" cy="197.8" r="4" fill="#00eaff"/>
+<circle cx="17.0" cy="286.3" r="8" fill="#c05aff" opacity=".32" filter="url(#nodeglow)"/>
+<circle cx="17.0" cy="286.3" r="4" fill="#c05aff"/>
+<circle cx="132.0" cy="274.2" r="14" fill="#00eaff" opacity=".32" filter="url(#nodeglow)"/>
+<circle cx="132.0" cy="274.2" r="7" fill="#00eaff"/>
+<circle cx="247.0" cy="268.1" r="8" fill="#00eaff" opacity=".32" filter="url(#nodeglow)"/>
+<circle cx="247.0" cy="268.1" r="4" fill="#00eaff"/>
+<circle cx="362.0" cy="271.6" r="8" fill="#c05aff" opacity=".32" filter="url(#nodeglow)"/>
+<circle cx="362.0" cy="271.6" r="4" fill="#c05aff"/>
+<circle cx="477.0" cy="282.7" r="8" fill="#00eaff" opacity=".32" filter="url(#nodeglow)"/>
+<circle cx="477.0" cy="282.7" r="4" fill="#00eaff"/>
+<circle cx="592.0" cy="294.5" r="8" fill="#00eaff" opacity=".32" filter="url(#nodeglow)"/>
+<circle cx="592.0" cy="294.5" r="4" fill="#00eaff"/>
+<circle cx="707.0" cy="300.0" r="14" fill="#c05aff" opacity=".32" filter="url(#nodeglow)"/>
+<circle cx="707.0" cy="300.0" r="7" fill="#c05aff"/>
+<circle cx="822.0" cy="295.8" r="8" fill="#00eaff" opacity=".32" filter="url(#nodeglow)"/>
+<circle cx="822.0" cy="295.8" r="4" fill="#00eaff"/>
+<circle cx="937.0" cy="284.4" r="8" fill="#00eaff" opacity=".32" filter="url(#nodeglow)"/>
+<circle cx="937.0" cy="284.4" r="4" fill="#00eaff"/>
+<circle cx="1052.0" cy="272.8" r="8" fill="#c05aff" opacity=".32" filter="url(#nodeglow)"/>
+<circle cx="1052.0" cy="272.8" r="4" fill="#c05aff"/>
+<circle cx="1167.0" cy="268.0" r="8" fill="#00eaff" opacity=".32" filter="url(#nodeglow)"/>
+<circle cx="1167.0" cy="268.0" r="4" fill="#00eaff"/>
+<circle cx="1282.0" cy="272.9" r="14" fill="#00eaff" opacity=".32" filter="url(#nodeglow)"/>
+<circle cx="1282.0" cy="272.9" r="7" fill="#00eaff"/>
+<circle cx="1397.0" cy="284.5" r="8" fill="#c05aff" opacity=".32" filter="url(#nodeglow)"/>
+<circle cx="1397.0" cy="284.5" r="4" fill="#c05aff"/>
+<g fill="none" stroke="url(#netglow)" stroke-width="2" opacity=".75">
+<path d="M100 280 Q700 -65 1300 280"/>
+<path d="M250 315 Q700 0 1150 315"/>
+</g>
+
+<g class="epic-energy-trails">
+<path d="M0 260 Q350 80 700 190 T1400 90"
+ stroke="#00efff"/>
+<path d="M0 100 Q350 300 700 110 T1400 260"
+ stroke="#bb5aff"/>
+<path d="M100 330 Q700 -40 1300 330"
+ stroke="#ff72df"/>
+</g>
+</svg>
+</div>
+</div>
+
+
+<div class="cta-band">
+  <div class="actions">
+    <a class="btn" href="#about">EXPLORE THE VISION</a>
+<a class="btn orange" href="#roadmap">VIEW ROADMAP</a>
+  </div>
+</div>
+
+<section id="about">
+<div class="wrap">
+<div class="section-label">01 / THE ECOSYSTEM</div>
+<h2>BUILT TO GO <span style="color:var(--cyan)">BEYOND.</span></h2>
+<p class="lead">EPIC Network is our vision for an open, Ethereum-compatible blockchain environment. We are developing the technology and exploring the infrastructure needed to make that vision a reality.</p>
+<div class="features">
+<article class="feature"><div class="feature-icon" aria-hidden="true"><span>⬡</span></div><h3>EPIC Network</h3><p>A planned blockchain network designed for developers, decentralized applications, and new possibilities.</p></article>
+<article class="feature" id="token"><div class="feature-icon" aria-hidden="true"><span>E</span></div><h3>ECHO Token</h3><p>Our existing Polygon-based digital asset, with future ecosystem utilities and integration under development.</p></article>
+<article class="feature"><div class="feature-icon" aria-hidden="true"><span>◇</span></div><h3>ECHO Protocol</h3><p>Research and development in zero-knowledge proofs, geographic verification, and smart-account authorization.</p></article>
+</div>
+</div>
+</section>
+
+<section id="roadmap">
+<div class="wrap">
+<div class="section-label">02 / OUR JOURNEY</div>
+<h2>DEVELOPMENT <span style="color:var(--purple)">ROADMAP.</span></h2>
+<p class="lead">Real progress. Transparent milestones. No imaginary launch dates.</p>
+<div class="timeline">
+<div class="milestone"><span class="status">DEPLOYED</span><h3>01 / Smart Contracts</h3><p>Initial token deployment on Polygon and protocol contracts deployed on Amoy testnet.</p></div>
+<div class="milestone"><span class="status">IN TESTING</span><h3>02 / Protocol Verification</h3><p>Proof verification and authorization testing, including fresh-checkpoint integration.</p></div>
+<div class="milestone"><span class="status">PLANNED</span><h3>03 / EPIC Testnet</h3><p>Evaluate Layer 2 infrastructure and develop an independent network test environment.</p></div>
+<div class="milestone"><span class="status">FUTURE</span><h3>04 / Public Launch</h3><p>Security review, infrastructure readiness, and ecosystem launch planning.</p></div>
+</div>
+</div>
+</section>
+
+<section class="community" id="community">
+<div class="wrap">
+<div class="section-label">03 / THE COMMUNITY</div>
+<h2>BE PART OF SOMETHING <span style="color:var(--cyan)">EPIC.</span></h2>
+<p class="lead">Follow our development journey as ECHO Protocol evolves and the EPIC Network vision takes shape.</p>
+<p style="color:#9bb8ed">Official social media links will be added here.</p>
+<a class="btn" href="#home">BACK TO THE TOP ↑</a>
+</div>
+</section>
+
+<section id="egp1" class="egp-section">
+  <div class="egp-wrap">
+    <div class="section-label">03 / TECHNICAL DOCUMENTATION</div>
+    <h2 class="egp-heading">EGP-1 <span>THE ECHO PROTOCOL BLUEPRINT.</span></h2>
+    <p class="egp-copy">
+      Explore the technical vision behind Echo Protocol and its proposed
+      mainnet parameters.
+    </p>
+
+    <div class="egp-layout">
+      <div>
+        <img
+          class="egp-cover"
+          src="egp-1-cover.webp"
+          alt="EGP-1 Echo Protocol technical presentation cover"
+          loading="lazy"
+        >
+      </div>
+      <div>
+        <h3 style="font-size:28px;color:white;margin-bottom:20px">
+          The Technology Behind the Vision
+        </h3>
+        <p class="egp-copy">
+          EGP-1 presents proposed protocol parameters and technical
+          considerations for Echo Protocol, including geographic
+          verification, zero-knowledge proofs, checkpoint validation,
+          and staking architecture.
+        </p>
+        <div class="egp-topics">
+          <span>Zero-Knowledge Proofs</span>
+          <span>Geographic Verification</span>
+          <span>Checkpoint Validation</span>
+          <span>Staking Architecture</span>
+          <span>Mainnet Parameters</span>
+        </div>
+        <a class="egp-button"
+           href="EGP1-FINAL-2026.pdf"
+           target="_blank"
+           rel="noopener noreferrer">
+          VIEW EGP-1 PRESENTATION ↗
+        </a>
+        <p class="egp-note">
+          Technical proposal and development documentation.
+          Proposed parameters do not constitute a confirmed mainnet
+          launch or independent security certification.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+<strong>EPIC NETWORK — POWERED BY ECHO</strong>
+<p>Project status: In development. EPIC Network is not yet live. No public launch date or token sale has been announced.</p>
+<p>© 2026 EPIC Network. All rights reserved.</p>
+</footer>
+</body>
+</html>
